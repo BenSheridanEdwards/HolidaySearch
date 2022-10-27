@@ -1,0 +1,14 @@
+$bp-m: 768px;
+$bp-l: 1024px;
+
+@mixin tablet-screens-up {
+  @media (min-width: $bp-m) {
+    @content;
+  }
+}
+
+@mixin desktop-screens-up {
+  @media (min-width: $bp-l) {
+    @content;
+  }
+}
