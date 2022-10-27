@@ -1,9 +1,11 @@
 import React from 'react';
+import DOMPurify from 'dompurify';
 
 interface RichTextProps {
-  html: { __html: string };
+  htmlString: string;
 }
 
-export function RichText({ html }: RichTextProps) {
-  return <div dangerouslySetInnerHTML={html} />;
+export function RichText({ htmlString }: RichTextProps) {
+  const cleanHtml = DOMPurify.sanitize(htmlString);
+  return <div dangerouslySetInnerHTML={{ __html: cleanHtml }} />;
 }
