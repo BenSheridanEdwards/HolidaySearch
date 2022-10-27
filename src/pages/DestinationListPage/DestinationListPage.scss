@@ -6,6 +6,12 @@
   flex-direction: column;
 }
 
+.DestinationListPage__heading-results-count {
+  color: $gray70;
+  font-size: 16px;
+  margin-top: 16px;
+}
+
 .DestinationListPage__list {
   display: grid;
   grid-gap: 24px;

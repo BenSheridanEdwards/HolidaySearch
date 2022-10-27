@@ -18,7 +18,7 @@ export function DestinationListPage() {
   if (error) return <div>`Error! ${error.message}`</div>;
   if (loading) return <div>Loading...</div>;
 
-  const { sales } = data.saleSearch;
+  const { sales, resultCount } = data.saleSearch;
 
   return (
     <div className='DestinationListPage'>
@@ -26,6 +26,9 @@ export function DestinationListPage() {
         <h1>
           Dream <span>destinations</span>, choose the next one.
         </h1>
+        <h2 className='DestinationListPage__heading-results-count'>
+          Showing 10 of {resultCount} results
+        </h2>
       </PageHeaderWrapper>
       <ul className='DestinationListPage__list'>
         {sales &&
