@@ -1,0 +1,11 @@
+@import "../../sass/master.scss";
+
+.Layout {
+  max-width: 1080px;
+  padding: 0 32px;
+  margin-inline: auto;
+
+  @include tablet-screens-up {
+    padding: 0 64px;
+  }
+}
