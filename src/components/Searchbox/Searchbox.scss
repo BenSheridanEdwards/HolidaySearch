@@ -1,0 +1,15 @@
+@import '../../sass/master.scss';
+
+.Searchbox {
+  align-items: center;
+  background: $white;
+  color: $gray70;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  gap: 8px;
+  height: 56px;
+  padding: 16px 24px;
+  width: 100%;
+}

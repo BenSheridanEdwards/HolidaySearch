@@ -1,0 +1,47 @@
+@import '../../sass/master.scss';
+
+.Btn {
+  align-items: center;
+  background-color: #303550;
+  border-radius: 16px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  font-size: 14px;
+  font-weight: 600;
+  height: fit-content;
+  justify-content: center;
+  line-height: 18px;
+  margin-top: 16px;
+  min-height: 40px;
+  min-width: fit-content;
+  outline: none;
+  padding: 16px 32px;
+  width: fit-content;
+}
+
+.Btn:hover {
+  background-color: #3b4161;
+}
+
+.Btn--primary {
+  background: linear-gradient(
+    157.81deg,
+    #30392d -43.27%,
+    #bef3f5 -21.24%,
+    #9dedf0 12.19%,
+    #7de7eb 29.82%,
+    #5ce1e6 51.94%,
+    #33bbcf 90.29%
+  );
+
+  color: $blackMamba;
+}
+
+.Btn--primary:hover {
+  background-color: #00f6ff;
+}
+
+.Btn--fullWidth {
+  width: 100%;
+}

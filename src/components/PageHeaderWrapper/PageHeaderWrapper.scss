@@ -1,0 +1,12 @@
+@import '../../sass/master.scss';
+
+.PageHeaderWrapper {
+  margin-bottom: 32px;
+  margin-top: 64px;
+  max-width: 360px;
+  text-align: center;
+
+  span {
+    color: $aqua;
+  }
+}
