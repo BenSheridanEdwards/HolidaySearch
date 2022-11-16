@@ -1,20 +1,20 @@
-import React, { ReactElement } from 'react';
-import { useQuery } from '@apollo/client';
-import { useParams } from 'react-router-dom';
-import { Card } from '../../components/Card/Card';
-import { Carousel } from '../../components/Carousel/Carousel';
-import { PageHeaderWrapper } from '../../components/PageHeaderWrapper/PageHeaderWrapper';
-import { PageWrapper } from '../../components/PageWrapper/PageWrapper';
-import { PriceSquare } from '../../components/PriceSqaure/PriceSquare';
-import { RichText } from '../../components/RichText/RichText';
-import { Tray } from '../../components/Tray/Tray';
-import { TrayHeaderWrapper } from '../../components/Tray/TrayHeaderWrapper/TrayHeaderWrapper';
-import { DestinationPhoto } from '../../global';
-import { GET_DESTINATION_BY_ID } from '../../graphql/queries/getDestinationById';
-import './DestinationDetailPage.scss';
+"use client";
 
-export function DestinationDetailPage(): ReactElement {
-  const { id } = useParams();
+import React, { ReactElement } from "react";
+import { useQuery } from "@apollo/client";
+import { Card } from "@/components/Card/Card";
+import { Carousel } from "@/components/Carousel/Carousel";
+import { PageHeaderWrapper } from "@/components/PageHeaderWrapper/PageHeaderWrapper";
+import { PageWrapper } from "@/components/PageWrapper/PageWrapper";
+import { PriceSquare } from "@/components/PriceSqaure/PriceSquare";
+import { RichText } from "@/components/RichText/RichText";
+import { Tray } from "@/components/Tray/Tray";
+import { TrayHeaderWrapper } from "@/components/Tray/TrayHeaderWrapper/TrayHeaderWrapper";
+import { DestinationPhoto } from "@/types";
+import { GET_DESTINATION_BY_ID } from "@/graphql/queries/getDestinationById";
+
+export default function DestinationDetailPage({ params }): ReactElement {
+  const id = params.slug;
   const { loading, error, data } = useQuery(GET_DESTINATION_BY_ID, {
     variables: { destinationId: id },
   });
@@ -35,7 +35,7 @@ export function DestinationDetailPage(): ReactElement {
           Dream <span>destinations</span>, learn all the details.
         </h1>
       </PageHeaderWrapper>
-      <div className='DestinationDetailPage__content'>
+      <div className="flex w-full flex-col items-center">
         <Carousel scrollDuration={100} scrollLength={358}>
           {photos &&
             photos.length > 0 &&
@@ -58,7 +58,7 @@ export function DestinationDetailPage(): ReactElement {
               <h4>{title}</h4>
               <h5>{destinationName}</h5>
             </div>
-            <PriceSquare pricePerNight={displayPrice} frequency='night' />
+            <PriceSquare pricePerNight={displayPrice} frequency="night" />
           </TrayHeaderWrapper>
           <RichText htmlString={richTextContent} />
         </Tray>

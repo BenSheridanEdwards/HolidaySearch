@@ -1,0 +1,8 @@
+/* ./styles/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "base/colors";
+@import "base/breakpoints";
+@import "base/global";
