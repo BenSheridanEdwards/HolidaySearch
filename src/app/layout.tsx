@@ -26,7 +26,7 @@ export default function RootLayout({
       </head>
       <body>
         <ApolloProvider client={apolloClient}>
-          <div className="mx-auto max-w-screen-lg">{children}</div>
+          <div className="mx-auto max-w-screen-lg px-8">{children}</div>
         </ApolloProvider>
       </body>
     </html>

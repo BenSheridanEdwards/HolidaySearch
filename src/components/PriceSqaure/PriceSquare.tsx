@@ -1,16 +1,15 @@
-import React from 'react';
-import './PriceSquare.scss';
+import React from "react";
 
 interface PriceSquareProps {
   pricePerNight: string;
-  frequency: 'night' | 'day' | 'week' | 'month';
+  frequency: "night" | "day" | "week" | "month";
 }
 
 export function PriceSquare({ pricePerNight, frequency }: PriceSquareProps) {
   return (
-    <div className='PriceSquare'>
-      <div className='PriceSquare__price-text'>{pricePerNight}</div>
-      <div className='PriceSquare__frequency-text'>{`/${frequency}`}</div>
+    <div className="flex h-20 w-20 flex-col items-center justify-center rounded-lg bg-dark p-3">
+      <div className="text-xl font-semibold text-light">{pricePerNight}</div>
+      <div className="text-sm text-gray-200">{`/${frequency}`}</div>
     </div>
   );
 }

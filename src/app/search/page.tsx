@@ -7,7 +7,6 @@ import { Card } from "../../components/Card/Card";
 import { PageHeaderWrapper } from "../../components/PageHeaderWrapper/PageHeaderWrapper";
 import type { SaleDestination } from "@/types";
 import { GET_HOTELS_WITH_QUERY } from "../../graphql/queries/getHotelsWithQuery";
-import "./DestinationListPage.scss";
 import { useSearchParams } from "next/navigation";
 
 export default function DestinationListPage() {
@@ -41,11 +40,11 @@ export default function DestinationListPage() {
         <h1>
           Dream <span>destinations</span>, choose the next one.
         </h1>
-        <h2 className="mt-4 text-lg text-gray-700">
+        <h2 className="mt-4 text-lg text-gray-400">
           Showing {destinationResults.length} of {resultCount} results
         </h2>
       </PageHeaderWrapper>
-      <ul className="DestinationListPage__list">
+      <ul className="grid grid-cols-1 justify-center gap-6 md:grid-cols-2 lg:grid-cols-3">
         {destinationResults &&
           destinationResults.length > 0 &&
           destinationResults.map((destination: SaleDestination) => {
@@ -53,10 +52,7 @@ export default function DestinationListPage() {
             const [coverImage] = destination.photos;
             const linkUrl = `/sale/${destination.id}`;
             return (
-              <li
-                key={destination.id}
-                className="DestinationListPage__list-item"
-              >
+              <li key={destination.id}>
                 <Card
                   coverImageUrl={coverImage.url}
                   imageDescription={destinationName}

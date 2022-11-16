@@ -1,5 +1,4 @@
-import React, { FormEventHandler, ReactNode } from 'react';
-import './FormWrapper.scss';
+import React, { FormEventHandler, ReactNode } from "react";
 
 interface FormWrapperProps {
   onSubmitHandler: FormEventHandler;
@@ -8,7 +7,10 @@ interface FormWrapperProps {
 
 export function FormWrapper({ onSubmitHandler, children }: FormWrapperProps) {
   return (
-    <form onSubmit={onSubmitHandler} className='FormWrapper'>
+    <form
+      onSubmit={onSubmitHandler}
+      className="flex w-full flex-col items-center"
+    >
       {children}
     </form>
   );

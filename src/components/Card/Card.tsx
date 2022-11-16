@@ -1,6 +1,5 @@
 import React, { ReactNode } from "react";
 import Link from "next/link";
-import "./Card.scss";
 
 interface CardProps {
   children: ReactNode;
@@ -17,31 +16,31 @@ export function Card({
 }: CardProps) {
   if (linkUrl) {
     return (
-      <Link href={linkUrl} className="Card__link-wrapper">
-        <article className="Card">
-          <div className="Card__image-container">
+      <Link href={linkUrl} className="group no-underline">
+        <article className="h-full w-full max-w-[326px] rounded-2xl bg-light text-dark duration-200 ease-out group-hover:translate-y-[-8px]">
+          <div className="relative min-h-[200px] w-full pb-[56.25%]">
             <img
-              className="Card__image"
+              className="absolute left-0 bottom-0 right-0 top-0 max-h-[200px] w-full rounded-t-2xl"
               src={coverImageUrl}
               alt={imageDescription}
             />
           </div>
-          <div className="Card__contents">{children}</div>
+          <div className="py-3 px-4">{children}</div>
         </article>
       </Link>
     );
   }
 
   return (
-    <article className="Card">
-      <div className="Card__image-container">
+    <article className="h-full w-full max-w-[326px] rounded-2xl bg-light text-dark">
+      <div className="relative min-h-[200px] w-full pb-[56.25%]">
         <img
-          className="Card__image"
+          className="absolute left-0 bottom-0 right-0 top-0 max-h-[200px] w-full rounded-t-2xl"
           src={coverImageUrl}
           alt={imageDescription}
         />
       </div>
-      <div className="Card__contents">{children}</div>
+      <div className="py-3 px-4">{children}</div>
     </article>
   );
 }
