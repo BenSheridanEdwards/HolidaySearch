@@ -1,20 +1,23 @@
-import React, { useState } from 'react';
-import { useQuery } from '@apollo/client';
-import { useSearchParams } from 'react-router-dom';
-import { Button } from '../../components/Button/Button';
-import { Card } from '../../components/Card/Card';
-import { PageHeaderWrapper } from '../../components/PageHeaderWrapper/PageHeaderWrapper';
-import type { SaleDestination } from '../../global';
-import { GET_HOTELS_WITH_QUERY } from '../../graphql/queries/getHotelsWithQuery';
-import './DestinationListPage.scss';
+"use client";
 
-export function DestinationListPage() {
+import React, { useEffect, useState } from "react";
+import { useQuery } from "@apollo/client";
+import { Button } from "../../components/Button/Button";
+import { Card } from "../../components/Card/Card";
+import { PageHeaderWrapper } from "../../components/PageHeaderWrapper/PageHeaderWrapper";
+import type { SaleDestination } from "@/types";
+import { GET_HOTELS_WITH_QUERY } from "../../graphql/queries/getHotelsWithQuery";
+import "./DestinationListPage.scss";
+import { useSearchParams } from "next/navigation";
+
+export default function DestinationListPage() {
   const [offsetNumber, setOffsetNumber] = useState(0);
   const [resultCount, setResultCount] = useState(0);
-  const [destinationResults, setDestinationResults] = useState<SaleDestination[]>([]);
-
-  const [searchParams] = useSearchParams();
-  const urlSearchQuery = searchParams.get('query');
+  const [destinationResults, setDestinationResults] = useState<
+    SaleDestination[]
+  >([]);
+  const searchQuery = useSearchParams().toString();
+  const searchQueryParams = searchQuery.split("=")[1];
 
   const { loading, error } = useQuery(GET_HOTELS_WITH_QUERY, {
     onCompleted: (data) => {
@@ -22,7 +25,7 @@ export function DestinationListPage() {
       setDestinationResults([...destinationResults, ...newDestinationResults]);
       setResultCount(data.saleSearch.resultCount);
     },
-    variables: { query: urlSearchQuery, offsetNumber: offsetNumber },
+    variables: { query: searchQueryParams, offsetNumber: offsetNumber },
   });
 
   if (error) return <div>`Error! ${error.message}`</div>;
@@ -33,16 +36,16 @@ export function DestinationListPage() {
   };
 
   return (
-    <div className='DestinationListPage'>
+    <main className="flex flex-col items-center">
       <PageHeaderWrapper>
         <h1>
           Dream <span>destinations</span>, choose the next one.
         </h1>
-        <h2 className='DestinationListPage__heading-results-count'>
+        <h2 className="mt-4 text-lg text-gray-700">
           Showing {destinationResults.length} of {resultCount} results
         </h2>
       </PageHeaderWrapper>
-      <ul className='DestinationListPage__list'>
+      <ul className="DestinationListPage__list">
         {destinationResults &&
           destinationResults.length > 0 &&
           destinationResults.map((destination: SaleDestination) => {
@@ -50,7 +53,10 @@ export function DestinationListPage() {
             const [coverImage] = destination.photos;
             const linkUrl = `/sale/${destination.id}`;
             return (
-              <li key={destination.id} className='DestinationListPage__list-item'>
+              <li
+                key={destination.id}
+                className="DestinationListPage__list-item"
+              >
                 <Card
                   coverImageUrl={coverImage.url}
                   imageDescription={destinationName}
@@ -64,6 +70,6 @@ export function DestinationListPage() {
           })}
       </ul>
       <Button onClick={handleLoadMoreResults}>Load more</Button>
-    </div>
+    </main>
   );
 }

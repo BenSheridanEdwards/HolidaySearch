@@ -1,4 +1,4 @@
-@import '../../sass/master.scss';
+@import "@/styles/global.scss";
 
 .Btn {
   align-items: center;
@@ -33,7 +33,7 @@
     #7de7eb 29.82%,
     #5ce1e6 51.94%,
     #33bbcf 90.29%
-  );
+  ) !important;
 
   color: $blackMamba;
 }
