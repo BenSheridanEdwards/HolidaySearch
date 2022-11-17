@@ -9,6 +9,7 @@ export function LoadingSpinner() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className="timer animate-[curvedSpin_2s_ease-in-out_infinite]"
+      data-testid="spinner"
     >
       <path d="M68 12L12 12" stroke="white" strokeWidth="8" />
       <path d="M68 69L12 69" stroke="white" strokeWidth="8" />
