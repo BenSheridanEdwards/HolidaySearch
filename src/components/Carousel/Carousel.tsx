@@ -8,7 +8,11 @@ interface CarouselProps {
   children: any;
 }
 
-export function Carousel({ scrollDuration, scrollLength, children }: CarouselProps): ReactElement {
+export function Carousel({
+  scrollDuration,
+  scrollLength,
+  children,
+}: CarouselProps): ReactElement {
   return (
     <ReactCarousel
       navButtonScrollDuration={scrollDuration}

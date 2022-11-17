@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import React, { ChangeEvent, FormEvent, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { Button } from '@/components/Button/Button';
-import { FormWrapper } from '@/components/FormWrapper/FormWrapper';
-import { PageHeaderWrapper } from '@/components/PageHeaderWrapper/PageHeaderWrapper';
-import { Searchbox } from '@/components/Searchbox/Searchbox';
+import React, { ChangeEvent, FormEvent, useState } from "react";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/Button/Button";
+import { FormWrapper } from "@/components/FormWrapper/FormWrapper";
+import { PageHeaderWrapper } from "@/components/PageHeaderWrapper/PageHeaderWrapper";
+import { Searchbox } from "@/components/Searchbox/Searchbox";
 
 export default function Home() {
-  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const router = useRouter();
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
@@ -21,7 +21,7 @@ export default function Home() {
   }
 
   return (
-    <main className='flex flex-col items-center'>
+    <main className="flex flex-col items-center">
       <PageHeaderWrapper>
         <h1>
           Dream <span>destinations</span>, one search away.
@@ -29,11 +29,11 @@ export default function Home() {
       </PageHeaderWrapper>
       <FormWrapper onSubmitHandler={handleSubmitNavigation}>
         <Searchbox
-          placeholderText='Where will you go...'
+          placeholderText="Where will you go..."
           onChangeHandler={handleChange}
           value={searchQuery}
         />
-        <Button variant='submit' fullWidth>
+        <Button variant="submit" fullWidth>
           Take me there
         </Button>
       </FormWrapper>

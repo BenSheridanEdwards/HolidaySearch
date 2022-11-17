@@ -72,7 +72,9 @@ export default function DestinationDetailPage({ params }): ReactElement {
                 <h5>{destinationName}</h5>
               </div>
 
-              {displayPrice && <PriceSquare pricePerNight={displayPrice} frequency="night" />}
+              {displayPrice && (
+                <PriceSquare pricePerNight={displayPrice} frequency="night" />
+              )}
             </TrayHeaderWrapper>
             {richTextContent && <RichText htmlString={richTextContent} />}
           </Tray>

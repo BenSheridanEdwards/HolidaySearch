@@ -6,19 +6,21 @@ import { Card } from "@/components/Card/Card";
 import { LoadingSpinner } from "@/components/LoadingSpinner/LoadingSpinner";
 import { PageHeaderWrapper } from "@/components/PageHeaderWrapper/PageHeaderWrapper";
 import { GET_HOTELS_WITH_QUERY } from "@/graphql/queries/getHotelsWithQuery";
-import type { SaleDestination } from "@/types";
+import { SaleDestination } from "@/types";
 import { useQuery } from "@apollo/client";
 import { useSearchParams } from "next/navigation";
 
 export default function DestinationListPage() {
   const [offsetNumber, setOffsetNumber] = useState(0);
   const [resultCount, setResultCount] = useState(0);
-  const [destinationResults, setDestinationResults] = useState<SaleDestination[]>([]);
+  const [destinationResults, setDestinationResults] = useState<
+    SaleDestination[]
+  >([]);
   const searchQuery = useSearchParams().toString();
   const searchQueryParams = searchQuery.split("=")[1];
 
   const { loading, error } = useQuery(GET_HOTELS_WITH_QUERY, {
-    onCompleted: (data) => {
+    onCompleted: data => {
       const newDestinationResults = data?.saleSearch?.sales;
       setDestinationResults([...destinationResults, ...newDestinationResults]);
       setResultCount(data.saleSearch.resultCount);

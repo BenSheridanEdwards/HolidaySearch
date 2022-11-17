@@ -1,9 +1,4 @@
 module.exports = {
-  env: {
-    browser: true,
-    es2021: true,
-    jest: true,
-  },
   bracketSpacing: true,
   // importOrder: [
   //   'use client',
@@ -17,9 +12,9 @@ module.exports = {
   // importOrderSeparation: true,
   // importOrderSortSpecifiers: true,
   jsxSingleQuote: false,
-  printWidth: 100,
+  printWidth: 80,
   semi: true,
   singleQuote: false,
   tabWidth: 2,
-  trailingComma: 'all',
+  trailingComma: "all",
 };
