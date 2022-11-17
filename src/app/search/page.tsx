@@ -1,20 +1,19 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { useQuery } from "@apollo/client";
-import { Button } from "../../components/Button/Button";
-import { Card } from "../../components/Card/Card";
-import { PageHeaderWrapper } from "../../components/PageHeaderWrapper/PageHeaderWrapper";
+import React, { useState } from "react";
+import { Button } from "@/components/Button/Button";
+import { Card } from "@/components/Card/Card";
+import { LoadingSpinner } from "@/components/LoadingSpinner/LoadingSpinner";
+import { PageHeaderWrapper } from "@/components/PageHeaderWrapper/PageHeaderWrapper";
+import { GET_HOTELS_WITH_QUERY } from "@/graphql/queries/getHotelsWithQuery";
 import type { SaleDestination } from "@/types";
-import { GET_HOTELS_WITH_QUERY } from "../../graphql/queries/getHotelsWithQuery";
+import { useQuery } from "@apollo/client";
 import { useSearchParams } from "next/navigation";
 
 export default function DestinationListPage() {
   const [offsetNumber, setOffsetNumber] = useState(0);
   const [resultCount, setResultCount] = useState(0);
-  const [destinationResults, setDestinationResults] = useState<
-    SaleDestination[]
-  >([]);
+  const [destinationResults, setDestinationResults] = useState<SaleDestination[]>([]);
   const searchQuery = useSearchParams().toString();
   const searchQueryParams = searchQuery.split("=")[1];
 
@@ -24,11 +23,10 @@ export default function DestinationListPage() {
       setDestinationResults([...destinationResults, ...newDestinationResults]);
       setResultCount(data.saleSearch.resultCount);
     },
-    variables: { query: searchQueryParams, offsetNumber: offsetNumber },
+    variables: { query: searchQueryParams, offsetNumber },
   });
 
   if (error) return <div>`Error! ${error.message}`</div>;
-  if (loading && !destinationResults) return <div>Loading...</div>;
 
   const handleLoadMoreResults = () => {
     setOffsetNumber(offsetNumber + 10);
@@ -44,6 +42,11 @@ export default function DestinationListPage() {
           Showing {destinationResults.length} of {resultCount} results
         </h2>
       </PageHeaderWrapper>
+      {loading && (
+        <div className="w-full py-4 [&>svg]:mx-auto">
+          <LoadingSpinner />
+        </div>
+      )}
       <ul className="grid grid-cols-1 justify-center gap-6 md:grid-cols-2 lg:grid-cols-3">
         {destinationResults &&
           destinationResults.length > 0 &&
@@ -65,7 +68,9 @@ export default function DestinationListPage() {
             );
           })}
       </ul>
-      <Button onClick={handleLoadMoreResults}>Load more</Button>
+      {destinationResults && destinationResults.length > 0 && (
+        <Button onClick={handleLoadMoreResults}>Load more</Button>
+      )}
     </main>
   );
 }

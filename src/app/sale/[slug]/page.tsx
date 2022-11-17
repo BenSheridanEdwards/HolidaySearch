@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { Card } from "@/components/Card/Card";
 import { Carousel } from "@/components/Carousel/Carousel";
@@ -12,21 +12,31 @@ import { Tray } from "@/components/Tray/Tray";
 import { TrayHeaderWrapper } from "@/components/Tray/TrayHeaderWrapper/TrayHeaderWrapper";
 import { DestinationPhoto } from "@/types";
 import { GET_DESTINATION_BY_ID } from "@/graphql/queries/getDestinationById";
+import { LoadingSpinner } from "@/components/LoadingSpinner/LoadingSpinner";
 
 export default function DestinationDetailPage({ params }): ReactElement {
+  const [carouselPhotos, setCarouselPhotos] = useState([]);
+  const [title, setTitle] = useState("");
+  const [destinationName, setDestinationName] = useState("");
+  const [displayPrice, setDisplayPrice] = useState("");
+  const [richTextContent, setRichTextContent] = useState("");
   const id = params.slug;
   const { loading, error, data } = useQuery(GET_DESTINATION_BY_ID, {
     variables: { destinationId: id },
   });
 
-  if (error) return <div>Error! ${error.message}</div>;
-  if (loading) return <div>Loading...</div>;
+  useEffect(() => {
+    if (data) {
+      const destination = data.sale;
+      setTitle(destination.editorial.title);
+      setDestinationName(destination.editorial.destinationName);
+      setDisplayPrice(destination && destination.prices.leadRate.forDisplay);
+      setRichTextContent(destination?.editorial.hotelDetails);
+      setCarouselPhotos(destination.photos);
+    }
+  }, [data]);
 
-  const destination = data.sale;
-  const { title, destinationName } = destination.editorial;
-  const displayPrice = destination.prices.leadRate.forDisplay;
-  const richTextContent = destination.editorial.hotelDetails;
-  const { photos } = destination;
+  if (error) return <div>Error! ${error.message}</div>;
 
   return (
     <PageWrapper>
@@ -36,32 +46,37 @@ export default function DestinationDetailPage({ params }): ReactElement {
         </h1>
       </PageHeaderWrapper>
       <div className="flex w-full flex-col items-center">
-        <Carousel scrollDuration={100} scrollLength={358}>
-          {photos &&
-            photos.length > 0 &&
-            photos.map((photo: DestinationPhoto) => {
-              return (
-                <Card
-                  coverImageUrl={photo.url}
-                  imageDescription={photo.caption || destinationName}
-                  key={photo.url}
-                >
-                  <h5>{photo.caption || destinationName}</h5>
-                </Card>
-              );
-            })}
-        </Carousel>
+        {loading && (
+          <div className="w-full py-4 [&>svg]:mx-auto">
+            <LoadingSpinner />
+          </div>
+        )}
+        {carouselPhotos && carouselPhotos.length > 0 && (
+          <Carousel scrollDuration={100} scrollLength={358}>
+            {carouselPhotos.map((photo: DestinationPhoto) => (
+              <Card
+                coverImageUrl={photo.url}
+                imageDescription={photo.caption || destinationName}
+                key={photo.url}
+              >
+                <h5>{photo.caption || destinationName}</h5>
+              </Card>
+            ))}
+          </Carousel>
+        )}
+        {title && destinationName && (
+          <Tray>
+            <TrayHeaderWrapper>
+              <div>
+                <h4>{title}</h4>
+                <h5>{destinationName}</h5>
+              </div>
 
-        <Tray>
-          <TrayHeaderWrapper>
-            <div>
-              <h4>{title}</h4>
-              <h5>{destinationName}</h5>
-            </div>
-            <PriceSquare pricePerNight={displayPrice} frequency="night" />
-          </TrayHeaderWrapper>
-          <RichText htmlString={richTextContent} />
-        </Tray>
+              {displayPrice && <PriceSquare pricePerNight={displayPrice} frequency="night" />}
+            </TrayHeaderWrapper>
+            {richTextContent && <RichText htmlString={richTextContent} />}
+          </Tray>
+        )}
       </div>
     </PageWrapper>
   );

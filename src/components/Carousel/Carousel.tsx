@@ -4,14 +4,11 @@ import ReactCarousel from "react-carousel-light";
 interface CarouselProps {
   scrollDuration: number;
   scrollLength: number;
-  children: JSX.Element;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  children: any;
 }
 
-export function Carousel({
-  scrollDuration,
-  scrollLength,
-  children,
-}: CarouselProps): ReactElement {
+export function Carousel({ scrollDuration, scrollLength, children }: CarouselProps): ReactElement {
   return (
     <ReactCarousel
       navButtonScrollDuration={scrollDuration}

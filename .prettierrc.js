@@ -1,0 +1,25 @@
+module.exports = {
+  env: {
+    browser: true,
+    es2021: true,
+    jest: true,
+  },
+  bracketSpacing: true,
+  // importOrder: [
+  //   'use client',
+  //   '^react$',
+  //   '<THIRD_PARTY_MODULES>',
+  //   '~components/*',
+  //   '~utils/*',
+  //   '~hooks/*',
+  //   '^[./]',
+  // ],
+  // importOrderSeparation: true,
+  // importOrderSortSpecifiers: true,
+  jsxSingleQuote: false,
+  printWidth: 100,
+  semi: true,
+  singleQuote: false,
+  tabWidth: 2,
+  trailingComma: 'all',
+};

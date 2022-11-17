@@ -30,4 +30,5 @@ export function Button({ children, fullWidth, onClick, variant }: ButtonProps) {
 Button.defaultProps = {
   fullWidth: false,
   variant: "primary",
+  onClick: undefined,
 };
