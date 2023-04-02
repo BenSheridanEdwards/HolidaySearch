@@ -10,6 +10,7 @@ import { SaleDestination } from "@/types";
 import { useQuery } from "@apollo/client";
 import { useSearchParams } from "next/navigation";
 import { ButtonLink } from "@/components/ButtonLink/ButtonLink";
+import { PageWrapper } from "@/components/PageWrapper/PageWrapper";
 
 export default function DestinationListPage() {
   const [offsetNumber, setOffsetNumber] = useState(0);
@@ -36,7 +37,7 @@ export default function DestinationListPage() {
   };
 
   return (
-    <main className="relative flex flex-col items-center">
+    <PageWrapper>
       <ButtonLink
         href="/"
         variant="tertiary"
@@ -100,6 +101,6 @@ export default function DestinationListPage() {
       {destinationResults && destinationResults.length > 0 && (
         <Button onClick={handleLoadMoreResults}>Load more</Button>
       )}
-    </main>
+    </PageWrapper>
   );
 }

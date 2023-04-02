@@ -5,5 +5,7 @@ interface PageWrapperProps {
 }
 
 export function PageWrapper({ children }: PageWrapperProps) {
-  return <div className="flex flex-col items-center">{children}</div>;
+  return (
+    <main className="relative flex flex-col items-center">{children}</main>
+  );
 }

@@ -24,7 +24,7 @@ export function ButtonLink({
   const dynamicClassName = clsx({
     "peer flex items-center justify-center w-full h-12 px-4 text-sm font-medium leading-5 text-white transition-colors duration-200 ease-in-out rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white":
       variant === "primary" || variant === "secondary",
-    "peer flex items-center justify-center text-sm font-medium leading-5 transition-colors duration-200 ease-in-out rounded-md text-white hover:text-accent hover:bg-transparent":
+    "peer flex items-center justify-center text-sm font-medium leading-5 transition-colors duration-200 ease-in-out rounded-md text-white hover:text-accent hover:bg-dark":
       variant === "tertiary",
   });
 
