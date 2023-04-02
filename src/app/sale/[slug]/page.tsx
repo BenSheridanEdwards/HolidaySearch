@@ -13,7 +13,7 @@ import { TrayHeaderWrapper } from "@/components/Tray/TrayHeaderWrapper/TrayHeade
 import { DestinationPhoto } from "@/types";
 import { GET_DESTINATION_BY_ID } from "@/graphql/queries/getDestinationById";
 import { LoadingSpinner } from "@/components/LoadingSpinner/LoadingSpinner";
-import { ButtonLink } from "@/components/ButtonLink/ButtonLink";
+import { Button } from "@/components/Button/Button";
 
 export default function DestinationDetailPage({ params }): ReactElement {
   const [carouselPhotos, setCarouselPhotos] = useState([]);
@@ -41,8 +41,8 @@ export default function DestinationDetailPage({ params }): ReactElement {
 
   return (
     <PageWrapper>
-      <ButtonLink
-        href={`/`}
+      <Button
+        href="/"
         variant="tertiary"
         className="absolute left-0 top-6"
         leadingIcon={
@@ -65,7 +65,7 @@ export default function DestinationDetailPage({ params }): ReactElement {
         }
       >
         Back to search
-      </ButtonLink>
+      </Button>
       <PageHeaderWrapper>
         <h1>
           Dream <span>destinations</span>, learn all the details.

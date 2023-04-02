@@ -9,7 +9,6 @@ import { GET_HOTELS_WITH_QUERY } from "@/graphql/queries/getHotelsWithQuery";
 import { SaleDestination } from "@/types";
 import { useQuery } from "@apollo/client";
 import { useSearchParams } from "next/navigation";
-import { ButtonLink } from "@/components/ButtonLink/ButtonLink";
 import { PageWrapper } from "@/components/PageWrapper/PageWrapper";
 
 export default function DestinationListPage() {
@@ -38,7 +37,7 @@ export default function DestinationListPage() {
 
   return (
     <PageWrapper>
-      <ButtonLink
+      <Button
         href="/"
         variant="tertiary"
         className="absolute left-0 top-6"
@@ -62,7 +61,7 @@ export default function DestinationListPage() {
         }
       >
         Back to search
-      </ButtonLink>
+      </Button>
 
       <PageHeaderWrapper>
         <h1>
