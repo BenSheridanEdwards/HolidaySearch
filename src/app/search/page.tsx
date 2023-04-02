@@ -9,6 +9,7 @@ import { GET_HOTELS_WITH_QUERY } from "@/graphql/queries/getHotelsWithQuery";
 import { SaleDestination } from "@/types";
 import { useQuery } from "@apollo/client";
 import { useSearchParams } from "next/navigation";
+import { ButtonLink } from "@/components/ButtonLink/ButtonLink";
 
 export default function DestinationListPage() {
   const [offsetNumber, setOffsetNumber] = useState(0);
@@ -20,7 +21,7 @@ export default function DestinationListPage() {
   const searchQueryParams = searchQuery.split("=")[1];
 
   const { loading, error } = useQuery(GET_HOTELS_WITH_QUERY, {
-    onCompleted: data => {
+    onCompleted: (data) => {
       const newDestinationResults = data?.saleSearch?.sales;
       setDestinationResults([...destinationResults, ...newDestinationResults]);
       setResultCount(data.saleSearch.resultCount);
@@ -35,7 +36,33 @@ export default function DestinationListPage() {
   };
 
   return (
-    <main className="flex flex-col items-center">
+    <main className="relative flex flex-col items-center">
+      <ButtonLink
+        href="/"
+        variant="tertiary"
+        className="absolute left-0 top-6"
+        leadingIcon={
+          <div className="mr-2 flex h-[18px] w-[18px] transform items-center justify-center duration-200 ease-in-out group-hover:translate-x-[-4px]">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 18 18"
+            >
+              <g fill="none">
+                <path d="M0 0L18 0 18 18 0 18z" />
+                <path
+                  fill="currentColor"
+                  d="M15 8.25L5.872 8.25 10.065 4.058 9 3 3 9 9 15 10.057 13.943 5.872 9.75 15 9.75z"
+                />
+              </g>
+            </svg>
+          </div>
+        }
+      >
+        Back to search
+      </ButtonLink>
+
       <PageHeaderWrapper>
         <h1>
           Dream <span>destinations</span>, choose the next one.
